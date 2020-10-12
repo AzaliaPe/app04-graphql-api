@@ -37,7 +37,7 @@ export default {
             productGroupId: '2'
         }
     ],
-    productGroup:[
+    productGroups:[
         {
             id: '1',
             name: 'taco'
