@@ -65,6 +65,14 @@ const MutationType = new GraphQLObjectType({
                 return ProductGroup.findByIdAndUpdate(args.id, args);
             }
         },
+        deleteProductGroupId: {
+            type: ProductGroupType,
+            args: {id: {type: GraphQLID}},
+            resolve(parent, args){
+
+                return ProductGroup.findByIdAndRemove(args.id, args);
+            }
+        },
     }
 });
 
