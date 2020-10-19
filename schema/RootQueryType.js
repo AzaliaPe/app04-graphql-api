@@ -10,6 +10,9 @@ import ProductType from './ProductType.js';
 import UserType from './UserType.js';
 import AddressType from './AddressType.js';
 
+import OrderType from './OrderType.js';
+import Order from '../models/Order.js';
+
 const {GraphQLID, GraphQLObjectType, GraphQLList} = graphql;
 
 const RootQueryType = new GraphQLObjectType({
@@ -62,6 +65,20 @@ const RootQueryType = new GraphQLObjectType({
             type: new GraphQLList(AddressType),
             resolve(parent, args){
                 return AddressType.find();
+            }
+        },
+        //Orders
+        order: {
+            type: OrderType,
+            args: {id: {type: GraphQLID}},
+            resolve(parent, args){
+                return Order.findById(args.id);
+            }
+        },
+        orders: {
+            type: new GraphQLList(OrderType),
+            resolve(parent, args){
+                return Order.find();
             }
         }
     }   

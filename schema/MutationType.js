@@ -8,6 +8,10 @@ import UserType from './UserType.js';
 import AddressType from './AddressType.js';
 import User from '../models/User.js';
 import Address from '../models/Address.js';
+import OrderType from './OrderType.js';
+import Order from '../models/Order.js';
+import SaleType from './SaleType.js';
+import Sale from '../models/Sale.js';
 
 const {GraphQLID, GraphQLString, GraphQLFloat,GraphQLObjectType} = graphql;
 
@@ -105,6 +109,28 @@ const MutationType = new GraphQLObjectType({
             resolve(parent, args){
                 const address = new Address(args);
                 return address.save();
+            }
+        },
+        //Orders
+        addOrder: {
+            type: OrderType,
+            args:{userId: {type: GraphQLID}},
+            resolve(parent, args){
+                const order = new Order(args);
+                return order.save();
+            }
+        },
+        //Sales
+        addSale: {
+            type: SaleType,
+            args: {
+                productId: {type: GraphQLID},
+                orderId: {type: GraphQLID},
+                timeStamp: {type: GraphQLString}
+            },
+            resolve(parent, args){
+                const sale = new Sale(args);
+                return sale.save();
             }
         }
     }
