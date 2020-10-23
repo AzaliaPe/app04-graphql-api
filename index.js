@@ -2,12 +2,15 @@ import express from 'express';
 import expressGraphql from 'express-graphql';
 import Schema from './schema/Schema.js';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 const {graphqlHTTP} = expressGraphql;
 
 const port = 5000;
 
 const app = express();
+
+app.use(cors());
 
 const dbName = 'tacos-db';
 const user = 'admin';

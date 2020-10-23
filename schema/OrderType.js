@@ -24,7 +24,7 @@ const OrderType = new GraphQLObjectType({
             }
         },
         total: {
-            type: GraphQLFloat,
+            type: new GraphQLList(GraphQLFloat),
             resolve(parent, args){
                 const sales = Sale.find({orderId: parent.id});
                 const products = sales.map(sale => Product.findById(sale.productId));
